@@ -5,12 +5,12 @@ import heapq
 
 def generate_maze(size):
     """Generate a static maze with random obstacles."""
-    np.random.seed(42)  # Seed for reproducibility
+    np.random.seed(42) 
     maze = np.zeros((size, size))
-    for _ in range(int(size * size * 0.2)):  # 20% obstacles
+    for _ in range(int(size * size * 0.2)):  
         x, y = np.random.randint(0, size, 2)
         maze[x, y] = 1
-    maze[0, 0] = maze[size-1, size-1] = 0  # Ensure start and end are clear
+    maze[0, 0] = maze[size-1, size-1] = 0
     return maze
 
 def astar(maze, start, goal):
@@ -59,14 +59,14 @@ maze = generate_maze(size)
 start, goal = (0, 0), (size - 1, size - 1)
 path = astar(maze, start, goal)
 
-# Visualization and saving to GIF using Pillow
+
 fig, ax = plt.subplots()
 img = ax.imshow(maze, cmap='Greys', interpolation='nearest', animated=True)
 
 def update(frame):
     if frame < len(path):
         x, y = path[frame]
-        maze[x, y] = 0.5  # Mark the path
+        maze[x, y] = 0.5 
         img.set_data(maze)
     return img,
 
